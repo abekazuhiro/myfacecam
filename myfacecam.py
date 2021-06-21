@@ -1,6 +1,5 @@
 # coding: utf-8
 
-#test
 import cv2
 import numpy as np
 
@@ -9,8 +8,8 @@ def main():
 
     # カメラ設定
     cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
     # H264にしてカメラ読み込み時間を高速化
     cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('H', '2', '6', '4'));
 
