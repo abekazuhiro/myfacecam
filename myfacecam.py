@@ -3,6 +3,7 @@
 import cv2
 import os
 import numpy as np
+import multiprocessing
 
 assert os.path.isfile('haarcascade_frontalface_default.xml'), 'haarcascade_frontalface_default.xml がない'
 
@@ -10,6 +11,7 @@ def main():
     # 変数定義
 
     # カメラ設定
+    print("VideoCapture open")
     cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -20,6 +22,7 @@ def main():
         print("Not Opened VideoCapture.")
         exit()
 
+    print("VideoCapture start")
     while True:
         # カメラ映像読み込み
         ret, img = cap.read()
@@ -36,6 +39,7 @@ def main():
             break
 
     # 終了処理
+    print("VideoCapture end")
     cap.release()
     cv2.destroyAllWindows()
 
@@ -48,6 +52,11 @@ def getFace(img):
     gray = cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY)
     # 顔検出
     detectrects = cascade.detectMultiScale(image=gray, scaleFactor=1.05, minNeighbors=10, flags=None, minSize=(30,30))
+
+    # フィルタをかける
+#    ksize = (15, 15)
+#    img = cv2.GaussianBlur(img, ksize=ksize, sigmaX=0, sigmaY=0)
+
     # 顔が検出されたら赤枠を描画する
     if len(detectrects) > 0:
         for rect in detectrects:
@@ -58,3 +67,4 @@ if __name__ == '__main__':
     # カスケード分類器の定義
     cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     main()
+    print("end...")
