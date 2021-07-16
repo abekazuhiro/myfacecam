@@ -52,6 +52,7 @@ def main():
 if __name__ == '__main__':
     image_dir = 'image'
     filename_svm = "face_model_svm.sav"
-    k_value = 5
+    k_value = int(input("K値を指定してください > "))
+#   k_value = 5
     filename_knn = "face_model_knn_{0}.sav".format(k_value)
     main()
